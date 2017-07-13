@@ -11,10 +11,13 @@ except ImportError:
     from urllib.parse import urlencode
 
 from .exceptions import UnknownQueryType
+from .party_aql import find_by_aql
 from .party_config import party_config
 
 
 class Party:
+
+    find_by_aql = find_by_aql
 
     def __init__(self, config={}):
         self.log = logging.getLogger(__name__)
