@@ -39,6 +39,8 @@ class Party:
             response = requests.put(query, data=query.split('?', 1)[1], auth=auth, headers=self.headers)
         if query_type == "post":
             pass
+        elif query_type == 'delete':
+            response = requests.delete(query, auth=auth, headers=self.headers)
 
         if not response.ok:
             return None
