@@ -9,6 +9,7 @@ try:
 except ImportError:
     from urllib.parse import urlencode
 
+from .exceptions import UnknownQueryType
 from .party_config import party_config
 
 
@@ -37,10 +38,12 @@ class Party:
             response = requests.get(query, auth=auth, headers=self.headers)
         elif query_type == "put":
             response = requests.put(query, data=query.split('?', 1)[1], auth=auth, headers=self.headers)
-        if query_type == "post":
+        elif query_type == "post":
             pass
         elif query_type == 'delete':
             response = requests.delete(query, auth=auth, headers=self.headers)
+        else:
+            raise UnknownQueryType('Unsupported query type: %s' % query_type)
 
         if not response.ok:
             return None
