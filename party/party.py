@@ -66,6 +66,9 @@ class Party:
         else:
             raise UnknownQueryType('Unsupported query type: %s' % query_type)
 
+        self.log.debug('Artifactory response: [%d] %s', response.status_code,
+                       response.text)
+
         if not response.ok:
             return None
 
